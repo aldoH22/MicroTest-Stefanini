@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+
+  spring-api-image:
+    image: microtest-api-image
+    container_name: microtest-api-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    networks:
+      - spring-network
+    depends_on:
+      - mysql
+    
+  mysql:
+    image: mysql
+    container_name: mysql_database
+    environment: 
+      MYSQL_ROOT_PASSWORD: 1998
+      MYSQL_DATABASE: dockerDB
+      MYSQL_USER: aldoha 
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3307:3306"
+    networks: 
+      - spring-network
+    volumes:
+      - mysql-volume:/var/lib/mysql
+      
+networks:
+  spring-network:
+volumes:
+  mysql-volume:
