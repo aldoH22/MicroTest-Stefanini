@@ -115,7 +115,7 @@ public class UserServiceImplTest {
 		String result = userService.updateUser(updatedUserDTO, id);
 
 		// Then
-		assertEquals("Updated successfully", result);
+		assertEquals("Usuario actualizado correctamente", result);
 		assertEquals("Jesus", existingUserEntity.getName());
 		assertEquals("Figo", existingUserEntity.getLastName());
 		assertEquals("jesus@mail.com", existingUserEntity.getEmail());
@@ -123,6 +123,28 @@ public class UserServiceImplTest {
 		verify(userDao).save(existingUserEntity);
 
 	}
+	
+	@Test
+	public void testUpdateUserWhenEmailIsTheSame() {
+	    // Given
+	    UserDTO updatedUserDTO = DataProvider.newUserDTOMock();
+	    UserEntity existingUserEntity = DataProvider.userEntityMockAux();
+	    Long id = updatedUserDTO.getId();
+
+	    when(userDao.findById(id)).thenReturn(Optional.of(existingUserEntity));
+
+	    // When
+	    String result = userService.updateUser(updatedUserDTO, id);
+
+	    // Then
+	    assertEquals("Usuario actualizado correctamente", result);
+	    assertEquals("Jesus", existingUserEntity.getName());
+	    assertEquals("Figo", existingUserEntity.getLastName());
+	    assertEquals("jesus@mail.com", existingUserEntity.getEmail());
+	    assertEquals("password", existingUserEntity.getPassword());
+	    verify(userDao).save(existingUserEntity);
+	}
+
 
 	@Test
 	public void testUpdateUserWhenUserNotFound() {
@@ -165,7 +187,7 @@ public class UserServiceImplTest {
 		String result = userService.updateEmail(updatedUserDTO, id);
 
 		// Then
-		assertEquals("Email Updated successfully", result);
+		assertEquals("Email actualizado correctamente", result);
 		assertEquals("jesus@mail.com", existingUserEntity.getEmail());
 		verify(userDao).save(existingUserEntity);
 	}

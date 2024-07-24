@@ -29,7 +29,7 @@ public class UserServiceImpl implements IUserService {
 		}
 		UserEntity userEntity = convertToEntity(userDTO);
 		userDAO.save(userEntity);
-		return "Saved successfully";
+		return "Usuario creado correctamente";
 	}
 
 	@Transactional(readOnly = true)
@@ -55,9 +55,9 @@ public class UserServiceImpl implements IUserService {
         UserEntity currentUserEntity = userDAO.findById(id).orElseThrow(() -> 
         		new UserNotFoundException("Usuario con ID: " + id + " no encontrado"));
 
-		if(userDAO.existsByEmail(userDTO.getEmail())) {
-			throw new UserAlreadyExistsException("El email '" + userDTO.getEmail() + "' ya ha sido registrado");
-		}
+        if (!currentUserEntity.getEmail().equals(userDTO.getEmail()) && userDAO.existsByEmail(userDTO.getEmail())) {
+            throw new UserAlreadyExistsException("El email '" + userDTO.getEmail() + "' ya ha sido registrado");
+        }
         
         currentUserEntity.setName(userDTO.getName());
         currentUserEntity.setLastName(userDTO.getLastName());
@@ -65,7 +65,7 @@ public class UserServiceImpl implements IUserService {
         currentUserEntity.setPassword(userDTO.getPassword());
 
         userDAO.save(currentUserEntity);
-        return "Updated successfully";
+        return "Usuario actualizado correctamente";
 		
 	}
 
@@ -83,7 +83,7 @@ public class UserServiceImpl implements IUserService {
 		
         currentUserEntity.setEmail(userDTO.getEmail());
         userDAO.save(currentUserEntity);
-        return "Email Updated successfully";
+        return "Email actualizado correctamente";
 		
 	}
 
