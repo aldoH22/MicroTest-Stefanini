@@ -2,6 +2,7 @@ package com.microserviceTest;
 
 import java.util.List;
 
+import com.microserviceTest.dto.UserDTO;
 import com.microserviceTest.entity.UserEntity;
 
 public class DataProvider {
@@ -17,13 +18,18 @@ public class DataProvider {
 		);		
 	}
 	
-	public static UserEntity userMock() {
+	public static UserDTO userDTOMock() {
 		
-		return new UserEntity(3L, "Fernando", "Ortega", "fer@mail.com", "11111");
+		return new UserDTO(3L, "Fernando", "Ortega", "fer@mail.com", "11111");
 	}
 	
-	public static UserEntity newUserMock() {
+	public static UserDTO newUserDTOMock() {
 		
-		return new UserEntity(7L, "Jesus", "Figo", "jesus@mail.com", "password");
+		return new UserDTO(7L, "Jesus", "Figo", "jesus@mail.com", "password");
+	}
+	
+	public static UserEntity userEntityMock() {
+		
+		return new UserEntity(7L, "Cristian", "Grijalva", "cris@mail.com", "2222222");
 	}
 }

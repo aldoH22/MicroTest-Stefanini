@@ -83,7 +83,7 @@ public class UserServiceImpl implements IUserService {
 		
         currentUserEntity.setEmail(userDTO.getEmail());
         userDAO.save(currentUserEntity);
-        return "updateEmail";
+        return "Email Updated successfully";
 		
 	}
 

@@ -108,6 +108,13 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                        	<excludes>
+                        		<exclude>**/MicroserviceTestApplication.class</exclude>
+                        		<exclude>**/controller/UserControllerWs.class</exclude>
+                        		<exclude>**/exception/GlobalExceptionHandler.class</exclude>
+                        	</excludes>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>jacoco-check</id>
